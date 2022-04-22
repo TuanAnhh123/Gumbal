@@ -12,21 +12,76 @@ module.exports = {
 
         if(!interaction.member.permissions.has(Discord.Permissions.FLAGS.MANAGE_CHANNELS))
         {
-            return interaction.reply('\`❌\` Bạn không có quyền để dùng lệnh này.')
+            const embed = {
+                author: {
+                    name: 'Error',
+                    icon_url: 'https://cdn.discordapp.com/emojis/964905677518696548.webp?size=96&quality=lossless',
+                },
+                description : '❌ You do not have permission to use this command.',
+                color : 'BLUE',
+                timestamp: new Date(),
+                footer: {
+                    text: `${interaction.user.tag}`,
+                    icon_url: `${interaction.user.displayAvatarURL({dynamic : true})}`,
+                },
+            }
+            return interaction.reply({embeds : [embed]});
         }
 
         const channel = interaction.options.getChannel('channel');
 
-        if(!channel) return interaction.reply(`\`❌\` Hãy chọn channel bạn muốn.`);
+        if(!channel) 
+        {
+            const embed = {
+                author: {
+                    name: 'Error',
+                    icon_url: 'https://cdn.discordapp.com/emojis/964905677518696548.webp?size=96&quality=lossless',
+                },
+                description : '❌ You need to choose the channel you want.',
+                color : 'BLUE',
+                timestamp: new Date(),
+                footer: {
+                    text: `${interaction.user.tag}`,
+                    icon_url: `${interaction.user.displayAvatarURL({dynamic : true})}`,
+                },
+            }
+            return interaction.reply({embeds : [embed]});
+        }
 
         if(db.fetch(`${guild}_chatbot`) !== null)
         {
-            return interaction.reply(`\`❌\` Server này đã có kênh chat bot.`);
+            const embed = {
+                author: {
+                    name: 'Error',
+                    icon_url: 'https://cdn.discordapp.com/emojis/964905677518696548.webp?size=96&quality=lossless',
+                },
+                description : '❌ This server is already has chat bot channel.',
+                color : 'BLUE',
+                timestamp: new Date(),
+                footer: {
+                    text: `${interaction.user.tag}`,
+                    icon_url: `${interaction.user.displayAvatarURL({dynamic : true})}`,
+                },
+            }
+            return interaction.reply({embeds : [embed]});
         }
 
         await db.set(`${guild}_chatbot` , channel.id);
 
-        interaction.reply(`<:robot_icon:965528654622883850> <#${channel.id}> đã được đặt làm chat bot channel.`)
+        const embed = {
+            author: {
+                name: 'Setup',
+                icon_url: 'https://cdn.discordapp.com/emojis/967049012626731028.webp?size=96&quality=lossless',
+            },
+            description : `<:__:967049012626731028> Added chat bot channel : <#${channel.id}.`,
+            color : 'BLUE',
+            timestamp: new Date(),
+            footer: {
+                text: `${interaction.user.tag}`,
+                icon_url: `${interaction.user.displayAvatarURL({dynamic : true})}`,
+            },
+        }
+        interaction.reply({embeds : [embed]});
 
     }
 };
