@@ -73,7 +73,7 @@ module.exports = {
                 name: 'Setup',
                 icon_url: 'https://cdn.discordapp.com/emojis/967049012626731028.webp?size=96&quality=lossless',
             },
-            description : `<:__:967049012626731028> Added chat bot channel : <#${channel.id}.`,
+            description : `<:__:967049012626731028> Added chat bot channel : <#${channel.id}>.`,
             color : 'BLUE',
             timestamp: new Date(),
             footer: {
