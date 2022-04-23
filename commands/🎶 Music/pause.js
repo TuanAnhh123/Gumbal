@@ -14,7 +14,7 @@ module.exports = {
                     name: 'Error',
                     icon_url: 'https://cdn.discordapp.com/emojis/965142498416685106.gif?size=96&quality=lossless',
                 },
-                description : '❌ You need to join voice channel to use this command.',
+                description : '<:false:964905677518696548> You need to join voice channel to use this command.',
                 color : 'BLUE',
                 timestamp: new Date(),
                 footer: {
@@ -34,7 +34,7 @@ module.exports = {
                     name: 'Error',
                     icon_url: 'https://cdn.discordapp.com/emojis/965142498416685106.gif?size=96&quality=lossless',
                 },
-                description : '❌ There is no song right now.',
+                description : '<:false:964905677518696548> There is no song right now.',
                 color : 'BLUE',
                 timestamp: new Date(),
                 footer: {
@@ -51,7 +51,7 @@ module.exports = {
                     name: 'Error',
                     icon_url: 'https://cdn.discordapp.com/emojis/965142498416685106.gif?size=96&quality=lossless',
                 },
-                description : '❌ The player is already paused.',
+                description : '<:false:964905677518696548> The player is already paused.',
                 color : 'BLUE',
                 timestamp: new Date(),
                 footer: {

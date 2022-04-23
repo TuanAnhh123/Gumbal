@@ -17,7 +17,7 @@ module.exports = {
                     name: 'Error',
                     icon_url: 'https://cdn.discordapp.com/emojis/965142498416685106.gif?size=96&quality=lossless',
                 },
-                description : '❌ You do not have permission to use this command.',
+                description : '<:false:964905677518696548> You do not have permission to use this command.',
                 color : 'BLUE',
                 timestamp: new Date(),
                 footer: {
@@ -35,7 +35,7 @@ module.exports = {
                     name: 'Error',
                     icon_url: 'https://cdn.discordapp.com/emojis/965142498416685106.gif?size=96&quality=lossless',
                 },
-                description : '❌ This server has no chat bot channel.',
+                description : '<:false:964905677518696548> This server has no chat bot channel.',
                 color : 'BLUE',
                 timestamp: new Date(),
                 footer: {
@@ -55,7 +55,7 @@ module.exports = {
                 name: 'Remove',
                 icon_url: 'https://cdn.discordapp.com/emojis/967049012706422794.webp?size=96&quality=lossless',
             },
-            description : `<:__:967049012626731028> Removed the chat bot channel : <#${channel}>.`,
+            description : `<:remove:967328034652848168> Removed the chat bot channel : <#${channel}>.`,
             color : 'BLUE',
             timestamp: new Date(),
             footer: {

@@ -17,7 +17,7 @@ module.exports = {
                     name: 'Error',
                     icon_url: 'https://cdn.discordapp.com/emojis/965142498416685106.gif?size=96&quality=lossless',
                 },
-                description : '❌ You do not have permission to use this command.',
+                description : '<:false:964905677518696548> You do not have permission to use this command.',
                 color : 'BLUE',
                 timestamp: new Date(),
                 footer: {
@@ -37,7 +37,7 @@ module.exports = {
                     name: 'Error',
                     icon_url: 'https://cdn.discordapp.com/emojis/965142498416685106.gif?size=96&quality=lossless',
                 },
-                description : '❌ You need to choose the channel you want.',
+                description : '<:false:964905677518696548> You need to choose the channel you want.',
                 color : 'BLUE',
                 timestamp: new Date(),
                 footer: {
@@ -55,7 +55,7 @@ module.exports = {
                     name: 'Error',
                     icon_url: 'https://cdn.discordapp.com/emojis/965142498416685106.gif?size=96&quality=lossless',
                 },
-                description : '❌ This server is already has chat bot channel.',
+                description : '<:false:964905677518696548> This server is already has chat bot channel.',
                 color : 'BLUE',
                 timestamp: new Date(),
                 footer: {
@@ -73,7 +73,7 @@ module.exports = {
                 name: 'Setup',
                 icon_url: 'https://cdn.discordapp.com/emojis/967049012626731028.webp?size=96&quality=lossless',
             },
-            description : `<:__:967049012626731028> Added chat bot channel : <#${channel.id}>.`,
+            description : `<:true:964905677824852018> Added chat bot channel : <#${channel.id}>.`,
             color : 'BLUE',
             timestamp: new Date(),
             footer: {
