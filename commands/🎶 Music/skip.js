@@ -12,7 +12,7 @@ module.exports = {
             const embed = {
                 author: {
                     name: 'Error',
-                    icon_url: 'https://cdn.discordapp.com/emojis/964905677518696548.webp?size=96&quality=lossless',
+                    icon_url: 'https://cdn.discordapp.com/emojis/965142498416685106.gif?size=96&quality=lossless',
                 },
                 description : '❌ You need to join voice channel to use this command.',
                 color : 'BLUE',
@@ -32,7 +32,7 @@ module.exports = {
             const embed = {
                 author: {
                     name: 'Error',
-                    icon_url: 'https://cdn.discordapp.com/emojis/964905677518696548.webp?size=96&quality=lossless',
+                    icon_url: 'https://cdn.discordapp.com/emojis/965142498416685106.gif?size=96&quality=lossless',
                 },
                 description : '❌ There is no song right now.',
                 color : 'BLUE',
@@ -49,7 +49,7 @@ module.exports = {
             const embed = {
                 author: {
                     name: 'Error',
-                    icon_url: 'https://cdn.discordapp.com/emojis/964905677518696548.webp?size=96&quality=lossless',
+                    icon_url: 'https://cdn.discordapp.com/emojis/965142498416685106.gif?size=96&quality=lossless',
                 },
                 description : '❌ There is no next song.',
                 color : 'BLUE',

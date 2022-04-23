@@ -15,7 +15,7 @@ module.exports = {
             const embed = {
                 author: {
                     name: 'Error',
-                    icon_url: 'https://cdn.discordapp.com/emojis/964905677518696548.webp?size=96&quality=lossless',
+                    icon_url: 'https://cdn.discordapp.com/emojis/965142498416685106.gif?size=96&quality=lossless',
                 },
                 description : '❌ You do not have permission to use this command.',
                 color : 'BLUE',
@@ -33,7 +33,7 @@ module.exports = {
             const embed = {
                 author: {
                     name: 'Error',
-                    icon_url: 'https://cdn.discordapp.com/emojis/964905677518696548.webp?size=96&quality=lossless',
+                    icon_url: 'https://cdn.discordapp.com/emojis/965142498416685106.gif?size=96&quality=lossless',
                 },
                 description : '❌ This server has no chat bot channel.',
                 color : 'BLUE',
