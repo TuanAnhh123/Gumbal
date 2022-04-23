@@ -5,7 +5,7 @@ module.exports = {
     data : new SlashCommandBuilder()
         .setName('set-chatbot-channel')
         .setDescription('Set chat bot channel')
-        .addChannelOption(options => options.setName('channel').setDescription('Channel bạn muốn chọn')),
+        .addChannelOption(options => options.setName('channel').setDescription('The channel you want')),
     async execute(interaction,client) {
         const guild = interaction.guild.id;
         const db = interaction.client.db;

@@ -4,9 +4,11 @@ const { token } = require('./config.json');
 const { DisTube } = require('distube');
 const { YtDlpPlugin } = require("@distube/yt-dlp");
 const { MessageEmbed , MessageActionRow , MessageButton } = require('discord.js');
+const wait = require('node:timers/promises').setTimeout;
 const db = require("quick.db");
 const axios = require('axios');
 const fetch = require('node-fetch');
+const ms = require('ms');
 
 const client = new Client({ intents: [
 	Intents.FLAGS.GUILDS , 
@@ -52,6 +54,7 @@ client.distube = new DisTube(client, {
 })
 
 client.distube.on('playSong', (queue, song) => {
+	updateplaymsg(queue);
 	const embed = {
 		author: {
 			name: 'Now playing',
@@ -112,7 +115,7 @@ client.distube.on('addSong', (queue, song) => {
 	queue.textChannel?.send({embeds : [embed]});
 });
 client.distube.on("error", (channel, error) => channel.send(
-    "\`❌\` Có lỗi xảy ra: " + "\n" + `\`\`\`${error}\`\`\``
+    "<:false:964905677518696548> Error: " + "\n" + `\`\`\`${error}\`\`\``
 ));
 client.distube.on('searchNoResult', message => {
 	const embed = {
@@ -120,7 +123,7 @@ client.distube.on('searchNoResult', message => {
 			name: 'Error',
 			icon_url: 'https://cdn.discordapp.com/emojis/964905677518696548.webp?size=96&quality=lossless',
 		},
-		description : '❌ No result found.',
+		description : '<:false:964905677518696548> No result found.',
 		color : 'BLUE',
 		timestamp: new Date(),
 		footer: {
@@ -157,6 +160,7 @@ client.on('messageCreate' , async message => {
 	const db = message.client.db;
 
 	const chatbot_channel = db.get(`${guild}_chatbot`);
+	const music_channel = db.get(`${guild}_music_channel`);
 
 	if(message.channel.id === chatbot_channel && !message.author.bot)
 	{
@@ -168,6 +172,32 @@ client.on('messageCreate' , async message => {
 			.catch(() => {
 				message.reply("Couldn't fetch response!");
 			})
+	}
+	if(message.channel.id === music_channel && !message.author.bot)
+	{
+		if(!message.member.voice.channel)
+		{
+			const embed = {
+                author: {
+                    name: 'Error',
+                    icon_url: 'https://cdn.discordapp.com/emojis/965142498416685106.gif?size=96&quality=lossless',
+                },
+                description : '<:false:964905677518696548> You need to join voice channel.',
+                color : 'BLUE',
+                timestamp: new Date(),
+                footer: {
+                    text: `${message.author.tag}`,
+                    icon_url: `${message.author.displayAvatarURL({dynamic : true})}`,
+                },
+            }
+            return message.reply({embeds : [embed]});
+		}
+		await wait(2000);
+		message.delete();
+		message.client.distube.play(message.member.voice.channel , message.content , {
+            textChannel : message.channel,
+            member : message.member,
+        })
 	}
 })
 

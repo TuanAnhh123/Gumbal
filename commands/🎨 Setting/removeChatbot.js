@@ -5,7 +5,7 @@ const Discord = require('discord.js');
 module.exports = {
     data : new SlashCommandBuilder()
         .setName('remove-chatbot-channel')
-        .setDescription('Xóa chat bot channel'),
+        .setDescription('Remove chat bot channel'),
     async execute(interaction,client) {
         const guild = interaction.guild.id;
         const db = interaction.client.db;
