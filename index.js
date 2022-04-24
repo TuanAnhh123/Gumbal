@@ -19,34 +19,14 @@ const client = new Client({ intents: [
 ]});
 
 client.commands = new Collection();
-const ad_command = fs.readdirSync('./commands/🔨 Admin').filter(file => file.endsWith('.js'));
 
-for (const ad_file of ad_command) {
-	const command = require(`./commands/🔨 Admin/${ad_file}`);
-	client.commands.set(command.data.name, command);
-}
-
-const music_command = fs.readdirSync('./commands/🎶 Music').filter(file => file.endsWith('.js'));
-
-for (const music_file of music_command) {
-	const command = require(`./commands/🎶 Music/${music_file}`);
-	client.commands.set(command.data.name, command);
-}
-
-
-const setting_command = fs.readdirSync('./commands/🎨 Setting').filter(file => file.endsWith('.js'));
-
-for (const set_file of setting_command) {
-	const command = require(`./commands/🎨 Setting/${set_file}`);
-	client.commands.set(command.data.name, command);
-}
-
-const fun_command = fs.readdirSync('./commands/😎 Funny').filter(file => file.endsWith('.js'));
-
-for (const fun_file of fun_command) {
-	const command = require(`./commands/😎 Funny/${fun_file}`);
-	client.commands.set(command.data.name, command);
-}
+fs.readdirSync('./commands').forEach(folder => {
+	const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(d => d.endsWith('.js'));
+	for (const file of commandFiles) {
+		const command = require(`./commands/${folder}/${file}`);
+		client.commands.set(command.data.name, command);
+	}
+});
 
 client.once('ready', () => {
 	console.log('Ready!');

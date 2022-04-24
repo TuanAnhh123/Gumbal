@@ -4,7 +4,7 @@ const Discord = require('discord.js');
 module.exports = {
     data : new SlashCommandBuilder()
         .setName('set-chatbot-channel')
-        .setDescription('Set chat bot channel')
+        .setDescription('Set AI chat bot channel')
         .addChannelOption(options => options.setName('channel').setDescription('The channel you want')),
     async execute(interaction,client) {
         const guild = interaction.guild.id;
