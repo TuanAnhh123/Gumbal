@@ -5,7 +5,7 @@ const { MessageEmbed , MessageActionRow , MessageButton } = require('discord.js'
 module.exports = {
     data : new SlashCommandBuilder()
         .setName('play')
-        .setDescription('Listening to music')
+        .setDescription('Play music')
         .addStringOption(options => options.setName('song').setDescription('The song name or url')),
     async execute(interaction,client) {
         const song = interaction.options.getString('song');
