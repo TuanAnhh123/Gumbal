@@ -26,6 +26,13 @@ for (const set_file of setting_command) {
 	commands.push(command.data.toJSON());
 }
 
+const fun_command = fs.readdirSync('./commands/😎 Funny').filter(file => file.endsWith('.js'));
+
+for (const fun_file of fun_command) {
+	const command = require(`./commands/😎 Funny/${fun_file}`);
+	commands.push(command.data.toJSON());
+}
+
 const rest = new REST({ version: '9' }).setToken(token);
 
 (async () => {

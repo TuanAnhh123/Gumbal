@@ -41,6 +41,13 @@ for (const set_file of setting_command) {
 	client.commands.set(command.data.name, command);
 }
 
+const fun_command = fs.readdirSync('./commands/😎 Funny').filter(file => file.endsWith('.js'));
+
+for (const fun_file of fun_command) {
+	const command = require(`./commands/😎 Funny/${fun_file}`);
+	client.commands.set(command.data.name, command);
+}
+
 client.once('ready', () => {
 	console.log('Ready!');
 });
