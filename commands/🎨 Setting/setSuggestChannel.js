@@ -3,8 +3,8 @@ const Discord = require('discord.js');
 
 module.exports = {
     data : new SlashCommandBuilder()
-        .setName('set-chatbot-channel')
-        .setDescription('Set chat bot channel')
+        .setName('set-suggest-channel')
+        .setDescription('Set suggestion channel')
         .addChannelOption(options => options.setName('channel').setDescription('The channel you want')),
     async execute(interaction,client) {
         const guild = interaction.guild.id;
@@ -48,14 +48,14 @@ module.exports = {
             return interaction.reply({embeds : [embed]});
         }
 
-        if(db.fetch(`${guild}_chatbot`) !== null)
+        if(db.fetch(`${guild}_suggest`) !== null)
         {
             const embed = {
                 author: {
                     name: 'Error',
                     icon_url: 'https://cdn.discordapp.com/emojis/965142498416685106.gif?size=96&quality=lossless',
                 },
-                description : '<:false:964905677518696548> This server is already has chat bot channel.',
+                description : '<:false:964905677518696548> This server is already has suggestion channel.',
                 color : 'BLUE',
                 timestamp: new Date(),
                 footer: {
@@ -66,14 +66,14 @@ module.exports = {
             return interaction.reply({embeds : [embed]});
         }
 
-        await db.set(`${guild}_chatbot` , channel.id);
+        await db.set(`${guild}_suggest` , channel.id);
 
         const embed = {
             author: {
                 name: 'Setup',
                 icon_url: 'https://cdn.discordapp.com/emojis/967049012626731028.webp?size=96&quality=lossless',
             },
-            description : `<:true:964905677824852018> Added chat bot channel : <#${channel.id}>.`,
+            description : `<:true:964905677824852018> Added suggestion channel : <#${channel.id}>.`,
             color : 'BLUE',
             timestamp: new Date(),
             footer: {

@@ -4,6 +4,8 @@ const { token } = require('./config.json');
 const { DisTube } = require('distube');
 const { YtDlpPlugin } = require("@distube/yt-dlp");
 const { MessageEmbed , MessageActionRow , MessageButton } = require('discord.js');
+const { Player } = require("discord-player");
+const { QueryType } = require("discord-player");
 const wait = require('node:timers/promises').setTimeout;
 const db = require("quick.db");
 const axios = require('axios');
@@ -53,8 +55,19 @@ client.distube = new DisTube(client, {
 	plugins: [new YtDlpPlugin()],
 })
 
+client.player = new Player(client, {
+    ytdlOptions: {
+        quality: "highestaudio",
+        highWaterMark: 1 << 25
+    }
+})
+
 client.distube.on('playSong', (queue, song) => {
-	updateplaymsg(queue);
+	const music_channel = db.get(`${queue.textChannel.guild.id}_music_channel`);
+	if(queue.textChannel.id == music_channel)
+	{
+		return;
+	}
 	const embed = {
 		author: {
 			name: 'Now playing',
@@ -96,6 +109,11 @@ client.distube.on('playSong', (queue, song) => {
 	queue.textChannel?.send({embeds : [embed]});
 });
 client.distube.on('addSong', (queue, song) => {
+	const music_channel = db.get(`${queue.textChannel.guild.id}_music_channel`);
+	if(queue.textChannel.id == music_channel)
+	{
+		return;
+	}
 	const embed = {
 		author: {
 			name: 'Track added to queue',
@@ -141,6 +159,13 @@ process.on('unhandledRejection' , (reason , p , client) => {
 })
 
 client.on('interactionCreate', async interaction => {
+	if(interaction.isButton())
+	{
+		if(interaction.customId == 'pause')
+		{
+			interaction.client.distube.pause(interaction);
+		}
+	}
 	if (!interaction.isCommand()) return;
 
 	const command = client.commands.get(interaction.commandName);
@@ -161,6 +186,7 @@ client.on('messageCreate' , async message => {
 
 	const chatbot_channel = db.get(`${guild}_chatbot`);
 	const music_channel = db.get(`${guild}_music_channel`);
+	const suggest_channel = db.get(`${guild}_suggest`);
 
 	if(message.channel.id === chatbot_channel && !message.author.bot)
 	{
@@ -194,10 +220,36 @@ client.on('messageCreate' , async message => {
 		}
 		await wait(2000);
 		message.delete();
-		message.client.distube.play(message.member.voice.channel , message.content , {
-            textChannel : message.channel,
-            member : message.member,
-        })
+		const queue = await client.player.createQueue(message.guild);
+		if (!queue.connection) await queue.connect(message.member.voice.channel)
+		const result = await client.player.search(message.content , {
+			requestedBy: message.author,
+			searchEngine: QueryType.YOUTUBE_VIDEO
+		})
+		const song = result.tracks[0];
+        await queue.addTrack(song);
+		if (!queue.playing) await queue.play();
+	}
+	if(message.channel.id === suggest_channel && !message.author.bot)
+	{
+		message.delete();
+		const embed = {
+			author: {
+                name: 'New suggestion',
+                //icon_url: `${message.guild.iconURL()}`,
+            },
+			description : `${message.content}`,
+			color : 'BLUE',
+            timestamp: new Date(),
+            footer: {
+                text: `${message.author.tag}`,
+                icon_url: `${message.author.displayAvatarURL({dynamic : true})}`,
+            },
+		}
+		message.client.channels.cache.get(`${suggest_channel}`).send({embeds : [embed]}).then(msg => {
+			msg.react(`👍`);
+			msg.react(`👎`);
+		})
 	}
 })
 

@@ -9,6 +9,7 @@
     "axios": "^0.26.1",
     "clever-chat": "^8.0.1",
     "discord-api-types": "^0.31.1",
+    "discord-player": "^5.2.2",
     "discord.js": "^13.6.0",
     "distube": "^3.3.4",
     "ffmpeg-static": "^4.4.1",
