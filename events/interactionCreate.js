@@ -1,13 +1,6 @@
 module.exports = {
 	name: 'interactionCreate',
 	async execute(interaction,client) {
-        if(interaction.isButton())
-        {
-            if(interaction.customId == 'moderaction-help')
-            {
-                interaction.reply("ừ");
-            }
-        }
 		if (!interaction.isCommand()) return;
 
         const command = interaction.client.commands.get(interaction.commandName);
