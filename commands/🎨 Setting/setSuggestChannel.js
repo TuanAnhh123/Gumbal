@@ -47,7 +47,23 @@ module.exports = {
             }
             return interaction.reply({embeds : [embed]});
         }
-
+        if(channel.type !== 'GUILD_TEXT')
+        {
+            const embed = {
+                author: {
+                    name: 'Error',
+                    icon_url: 'https://cdn.discordapp.com/emojis/965142498416685106.gif?size=96&quality=lossless',
+                },
+                description : '<:false:964905677518696548> Please mention a text channel.',
+                color : 'BLUE',
+                timestamp: new Date(),
+                footer: {
+                    text: `${interaction.user.tag}`,
+                    icon_url: `${interaction.user.displayAvatarURL({dynamic : true})}`,
+                },
+            }
+            return interaction.reply({embeds : [embed]});
+        }
         if(db.fetch(`${guild}_suggest`) !== null)
         {
             const embed = {
