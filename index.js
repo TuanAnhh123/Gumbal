@@ -4,17 +4,17 @@ const { token } = require('./config.json');
 const { DisTube } = require('distube');
 const { YtDlpPlugin } = require("@distube/yt-dlp");
 const { MessageEmbed , MessageActionRow , MessageButton } = require('discord.js');
-const wait = require('node:timers/promises').setTimeout;
+const { GiveawaysManager } = require('discord-giveaways');
 const db = require("quick.db");
-const axios = require('axios');
-const fetch = require('node-fetch');
-const ms = require('ms');
 
 const client = new Client({ intents: [
 	Intents.FLAGS.GUILDS , 
 	Intents.FLAGS.GUILD_VOICE_STATES,
-	Intents.FLAGS.GUILD_MESSAGES
+	Intents.FLAGS.GUILD_MESSAGES,
+	Intents.FLAGS.GUILD_MESSAGE_REACTIONS
 ]});
+
+module.exports = client;
 
 client.commands = new Collection();
 
@@ -46,8 +46,17 @@ client.distube = new DisTube(client, {
 	youtubeDL : false,
 	plugins: [new YtDlpPlugin()],
 })
+client.giveaways = new GiveawaysManager(client , {
+	storage : `./giveaways.json`,
+	default: {
+        botsCanWin: false,
+        embedColor: '#FF0000',
+        embedColorEnd: '#000000',
+        reaction: '🎉'
+    },
+})
 
-client.distube.on('playSong', (queue, song) => {
+/*client.distube.on('playSong', (queue, song) => {
 	const embed = {
 		author: {
 			name: 'Now playing',
@@ -114,24 +123,8 @@ client.distube.on('addSong', (queue, song) => {
 });
 client.distube.on("error", (channel, error) => channel.send(
     "<:false:964905677518696548> Error: " + "\n" + `\`\`\`${error}\`\`\``
-));
-client.distube.on('searchNoResult', message => {
-	const embed = {
-		author: {
-			name: 'Error',
-			icon_url: 'https://cdn.discordapp.com/emojis/964905677518696548.webp?size=96&quality=lossless',
-		},
-		description : '<:false:964905677518696548> No result found.',
-		color : 'BLUE',
-		timestamp: new Date(),
-		footer: {
-			text: `${interaction.user.tag}`,
-			icon_url: `${interaction.user.displayAvatarURL({dynamic : true})}`,
-		},
-	}
-	//return interaction.reply({embeds : [embed]});
-	message.channel.send({embeds : [embed]})
-})
+)); */
+
 client.db = db;
 
 process.on('unhandledRejection' , (reason , p , client) => {

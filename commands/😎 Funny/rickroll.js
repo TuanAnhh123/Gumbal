@@ -28,17 +28,18 @@ module.exports = {
             return interaction.reply({embeds : [embed]});
         }
 
-        const icons = `https://discord.gg/gGpQurZHbz`;
-
         const embeds = {
             "color" : "GREEN",
-            "description" : `<a:giveaway:967703458218119168>・<@${user.id}> You won the previous giveaway.\n\n<:nitro:967702931707133962>・Prize : **Nitro classic yearly**.\n\n<:gift_1:967703691031371827>・Click [**https://discord.gift/abdhsHGsd**](https://www.youtube.com/watch?v=dQw4w9WgXcQ) to claim your prize.`,
+            "description" : `<:hop:968430225094496256>・<@${user.id}> You won the previous giveaway.\n\n<:nitro:968430225367126027>・Prize : **Nitro classic yearly**.\n\n<:qua:968430225018978304>・Click the button below to claim your prize.`,
             "footer" : {
                 "text" : `${user.tag}`,
                 icon_url: `${user.displayAvatarURL({dynamic : true})}`,
             },
             "timestamp" : new Date(),
         }
-        interaction.reply({content : `🎉 __GIVEAWAY ENDED__ 🎉` , embeds : [embeds]});
+        const row = new Discord.MessageActionRow().addComponents(
+            new Discord.MessageButton().setLabel('Nitro').setEmoji('<:nitro_boost:968430225073532969>').setStyle('LINK').setURL('https://www.youtube.com/watch?v=dQw4w9WgXcQ'),
+        )
+        interaction.reply({content : `🎉 __GIVEAWAY ENDED__ 🎉` , embeds : [embeds] , components : [row]});
     }
 };
