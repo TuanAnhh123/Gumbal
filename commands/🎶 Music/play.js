@@ -1,6 +1,7 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const Discord = require('discord.js');
 const { MessageEmbed , MessageActionRow , MessageButton } = require('discord.js');
+const distube = require('../../distube');
 
 module.exports = {
     data : new SlashCommandBuilder()
@@ -65,7 +66,7 @@ module.exports = {
             return interaction.reply({embeds : [embed]});
         }
 
-        interaction.client.distube.play(interaction.member.voice.channel , song , {
+        distube.play(interaction.member.voice.channel , song , {
             textChannel : interaction.channel,
             member : interaction.member,
         })

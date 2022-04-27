@@ -37,7 +37,7 @@ for (const file of eventFiles) {
 	}
 }
 
-client.distube = new DisTube(client, {
+/*client.distube = new DisTube(client, {
     searchSongs: 5,
     searchCooldown: 30,
     leaveOnEmpty: true,
@@ -45,14 +45,15 @@ client.distube = new DisTube(client, {
     leaveOnStop: true,
 	youtubeDL : false,
 	plugins: [new YtDlpPlugin()],
-})
+}) */
+
 client.giveaways = new GiveawaysManager(client , {
 	storage : `./giveaways.json`,
 	default: {
         botsCanWin: false,
         embedColor: '#FF0000',
         embedColorEnd: '#000000',
-        reaction: '🎉'
+        reaction: '<:gift_1:967703691031371827>'
     },
 })
 

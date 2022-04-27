@@ -53,29 +53,22 @@ module.exports = {
             return interaction.reply({embeds : [embed]});
         }
         
-        interaction.client.giveawaysManager.start(channel, {
+        interaction.client.giveaways.start(channel, {
             duration: ms(duration),
-            amount,
-            prize,
+            prize : prize,
+            winnerCount: amount,
             messages: {
-                giveaway: (client.config.everyoneMention ? "@everyone\n\n" : '') + "Giveaway",
-                giveawayEnd: (client.config.everyoneMention ? "@everyone\n\n" : '') + "Giveaway Ended",
-                timeRemaining: "Time Remaining **{duration}**",
-                inviteToParticipate: "React with 🎉 to join the giveaway",
-                winMessage: "Congrats {winners}, you have  won the giveaway",
-                embedFooter: "Giveaway Time!",
-                noWinner: "Could not determine a winner",
-                hostedBy: 'Hosted by {user}',
-                winners: "winners",
-                endedAt: 'Ends at',
-                units: {
-                    seconds: "seconds",
-                    minutes: "minutes",
-                    hours: 'hours',
-                    days: 'days',
-                    pluralS: false
-                }
-            },
+                giveaway: '<a:giveaway:967703458218119168> **__GIVEAWAY__** <a:giveaway:967703458218119168>',
+                giveawayEnded: '<a:giveaway:967703458218119168> **__GIVEAWAY ENDED__** <a:giveaway:967703458218119168>',
+                drawing: 'End in : {timestamp}',
+                inviteToParticipate: '<:click:968068045039882263>・React with <:gift_1:967703691031371827> to join the giveaway!',
+                winMessage: 'Congratulations, {winners}! You won **{this.prize}** from the previous giveaway\nJump to giveaway : {this.messageURL}.',
+                embedFooter: '{this.winnerCount} winner(s)',
+                noWinner: 'Giveaway cancelled, no valid participations.',
+                hostedBy: '<:humann2:968679355377156177>・Hosted by : ',
+                winners: '<:humann:968530639726981130>・Winner(s) : ',
+                endedAt: 'Ended at',
+            }
         })
     }
 };

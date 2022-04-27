@@ -1,8 +1,8 @@
-const client = require("..");
-const { MessageEmbed } = require('discord.js');
+const client = require('..');
+const distube = require('../distube');
 
-module.exports = async (client) => {
-    client.distube.on('playSong', async (queue, song) => {
+module.exports = async(client,distube) => {
+    distube.on('playSong', (queue, song) => {
         const embed = {
             author: {
                 name: 'Now playing',
@@ -41,9 +41,14 @@ module.exports = async (client) => {
                 icon_url: `${song.user.displayAvatarURL({dynamic : true})}`,
             },
         }
-        queue.textChannel.send({embeds : [embed]});
+        queue.textChannel?.send({embeds : [embed]});
     });
-    client.distube.on('addSong', (queue, song) => {
+    distube.on('addSong', (queue, song) => {
+        const music_channel = db.get(`${queue.textChannel.guild.id}_music_channel`);
+        if(queue.textChannel.id == music_channel)
+        {
+            return;
+        }
         const embed = {
             author: {
                 name: 'Track added to queue',
@@ -62,7 +67,7 @@ module.exports = async (client) => {
         }
         queue.textChannel?.send({embeds : [embed]});
     });
-    client.distube.on("error", (channel, error) => channel.send(
+    distube.on("error", (channel, error) => channel.send(
         "<:false:964905677518696548> Error: " + "\n" + `\`\`\`${error}\`\`\``
     ));
 }
