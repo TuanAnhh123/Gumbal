@@ -1,23 +1,23 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const Discord = require('discord.js');
-const { MessageEmbed , MessageActionRow , MessageButton } = require('discord.js');
 
 module.exports = {
     data : new SlashCommandBuilder()
-        .setName('play')
-        .setDescription('Play music')
-        .addStringOption(options => options.setName('song').setDescription('The song name or url')),
+        .setName('set-welcome-channel')
+        .setDescription('Set welcome channel to welcome new member')
+        .addChannelOption(options => options.setName('channel').setDescription('The channel you want')),
     async execute(interaction,client) {
-        const song = interaction.options.getString('song');
+        const guild = interaction.guild.id;
+        const db = interaction.client.db;
 
-        if(!song) 
+        if(!interaction.member.permissions.has(Discord.Permissions.FLAGS.MANAGE_CHANNELS))
         {
             const embed = {
                 author: {
                     name: 'Error',
                     icon_url: 'https://cdn.discordapp.com/emojis/965142498416685106.gif?size=96&quality=lossless',
                 },
-                description : '<:false:964905677518696548> You need to enter the song name.',
+                description : '<:false:964905677518696548> You do not have permission to use this command.',
                 color : 'BLUE',
                 timestamp: new Date(),
                 footer: {
@@ -28,14 +28,16 @@ module.exports = {
             return interaction.reply({embeds : [embed]});
         }
 
-        if(!interaction.member.voice.channel)
+        const channel = interaction.options.getChannel('channel');
+
+        if(!channel) 
         {
             const embed = {
                 author: {
                     name: 'Error',
                     icon_url: 'https://cdn.discordapp.com/emojis/965142498416685106.gif?size=96&quality=lossless',
                 },
-                description : '<:false:964905677518696548> You need to join voice channel to use this command.',
+                description : '<:false:964905677518696548> You need to choose the channel you want.',
                 color : 'BLUE',
                 timestamp: new Date(),
                 footer: {
@@ -45,16 +47,31 @@ module.exports = {
             }
             return interaction.reply({embeds : [embed]});
         }
-        const mChannel = interaction.member.voice.channel;
-        const cChannel = interaction.guild.me.voice.channel;
-        if (cChannel && mChannel.id !== cChannel.id) 
+        if(channel.type !== 'GUILD_TEXT')
         {
             const embed = {
                 author: {
                     name: 'Error',
                     icon_url: 'https://cdn.discordapp.com/emojis/965142498416685106.gif?size=96&quality=lossless',
                 },
-                description : '<:false:964905677518696548> I\'m playing music in other voice channel.',
+                description : '<:false:964905677518696548> Please mention a text channel.',
+                color : 'BLUE',
+                timestamp: new Date(),
+                footer: {
+                    text: `${interaction.user.tag}`,
+                    icon_url: `${interaction.user.displayAvatarURL({dynamic : true})}`,
+                },
+            }
+            return interaction.reply({embeds : [embed]});
+        }
+        if(db.fetch(`${guild}_welcome`) !== null)
+        {
+            const embed = {
+                author: {
+                    name: 'Error',
+                    icon_url: 'https://cdn.discordapp.com/emojis/965142498416685106.gif?size=96&quality=lossless',
+                },
+                description : '<:false:964905677518696548> This server is already has welcome channel.',
                 color : 'BLUE',
                 timestamp: new Date(),
                 footer: {
@@ -65,17 +82,14 @@ module.exports = {
             return interaction.reply({embeds : [embed]});
         }
 
-        interaction.client.distube.play(interaction.member.voice.channel , song , {
-            textChannel : interaction.channel,
-            member : interaction.member,
-        })
+        await db.set(`${guild}_welcome` , channel.id);
 
         const embed = {
             author: {
-                name: 'Searching music',
-                icon_url: 'https://cdn.discordapp.com/emojis/962926434597363712.gif?size=128&quality=lossless',
+                name: 'Setup',
+                icon_url: 'https://cdn.discordapp.com/emojis/967049012626731028.webp?size=96&quality=lossless',
             },
-            description : '<a:load:964783848145707048> Searching...',
+            description : `<:true:964905677824852018> Added welcome channel : <#${channel.id}>.`,
             color : 'BLUE',
             timestamp: new Date(),
             footer: {
@@ -83,7 +97,6 @@ module.exports = {
                 icon_url: `${interaction.user.displayAvatarURL({dynamic : true})}`,
             },
         }
-
         interaction.reply({embeds : [embed]});
     }
-};
+}
