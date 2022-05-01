@@ -6,8 +6,7 @@ module.exports = {
     data : new SlashCommandBuilder()
         .setName('enable-anti-ghostping')
         .setDescription('Enable anti ghost ping feature'),
-    async execute(interaction,client)
-    {
+    async execute(interaction,client) {
         const guild = interaction.guild.id;
         const db = interaction.client.db;
 

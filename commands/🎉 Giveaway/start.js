@@ -60,7 +60,7 @@ module.exports = {
             messages: {
                 giveaway: '<a:giveaway:967703458218119168> **__GIVEAWAY__** <a:giveaway:967703458218119168>',
                 giveawayEnded: '<a:giveaway:967703458218119168> **__GIVEAWAY ENDED__** <a:giveaway:967703458218119168>',
-                drawing: 'End in : {timestamp}',
+                drawing: '<:qua:968430225018978304>・End in : {timestamp}',
                 inviteToParticipate: '<:click:968068045039882263>・React with <:gift_1:967703691031371827> to join the giveaway!',
                 winMessage: 'Congratulations, {winners}! You won **{this.prize}** from the previous giveaway\nJump to giveaway : {this.messageURL}.',
                 embedFooter: '{this.winnerCount} winner(s)',
