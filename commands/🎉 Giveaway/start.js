@@ -1,6 +1,7 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const ms = require('ms');
 const Discord = require('discord.js');
+const giveaways_manager = require('../../utils/giveawayUtils');
 
 module.exports = {
     data : new SlashCommandBuilder()
@@ -53,7 +54,7 @@ module.exports = {
             return interaction.reply({embeds : [embed]});
         }
         
-        interaction.client.giveaways.start(channel, {
+        giveaways_manager.start(channel, {
             duration: ms(duration),
             prize : prize,
             winnerCount: amount,

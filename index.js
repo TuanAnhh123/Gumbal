@@ -22,18 +22,6 @@ client.commands = new Collection();
 
 require("./utils/handler.js")(client);
 
-client.giveaways = new GiveawaysManager(client , {
-	storage : `./giveaways.json`,
-	default: {
-        botsCanWin: false,
-        embedColor: '#FF0000',
-        embedColorEnd: '#28fc03',
-        reaction: '<:gift_1:967703691031371827>'
-    },
-})
-
 client.db = db;
-
-
 
 client.login(token);
