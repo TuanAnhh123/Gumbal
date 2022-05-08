@@ -64,7 +64,7 @@ module.exports = {
                 inviteToParticipate: '<:click:968068045039882263>・React with <:gift_1:967703691031371827> to join the giveaway!',
                 winMessage: 'Congratulations, {winners}! You won **{this.prize}** from the previous giveaway\nJump to giveaway : {this.messageURL}.',
                 embedFooter: '{this.winnerCount} winner(s)',
-                noWinner: 'Giveaway cancelled, no valid participations.',
+                noWinner: 'Giveaway cancelled,no valid participations.',
                 hostedBy: '<:humann2:968679355377156177>・Hosted by : ',
                 winners: '<:humann:968530639726981130>・Winner(s) : ',
                 endedAt: 'Ended at',

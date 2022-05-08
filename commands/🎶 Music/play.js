@@ -1,11 +1,12 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const Discord = require('discord.js');
+const distube = require('../../utils/distubeUtils');
 const { MessageEmbed , MessageActionRow , MessageButton } = require('discord.js');
 
 module.exports = {
     data : new SlashCommandBuilder()
         .setName('play')
-        .setDescription('Play music')
+        .setDescription('Listening to music')
         .addStringOption(options => options.setName('song').setDescription('The song name or url')),
     async execute(interaction,client) {
         const song = interaction.options.getString('song');
@@ -65,7 +66,7 @@ module.exports = {
             return interaction.reply({embeds : [embed]});
         }
 
-        interaction.client.distube.play(interaction.member.voice.channel , song , {
+        distube.play(interaction.member.voice.channel , song , {
             textChannel : interaction.channel,
             member : interaction.member,
         })

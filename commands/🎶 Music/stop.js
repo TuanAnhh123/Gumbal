@@ -1,6 +1,7 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
 const axios = require('axios');
+const distube = require('../../utils/distubeUtils');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -25,7 +26,7 @@ module.exports = {
             return interaction.reply({embeds : [embed]});
         }
 
-        const queue = interaction.client.distube.getQueue(interaction);
+        const queue = distube.getQueue(interaction);
 
         if(!queue)
         {
@@ -45,7 +46,7 @@ module.exports = {
             return interaction.reply({embeds : [embed]});
         }
 
-        interaction.client.distube.stop(interaction);
+        distube.stop(interaction);
 
         const embed = {
             author: {

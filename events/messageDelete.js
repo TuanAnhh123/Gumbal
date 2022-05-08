@@ -5,6 +5,7 @@ module.exports = {
         const fetch = require('node-fetch');
         const guild = message.guild.id;
         const db = message.client.db;
+        const ms = require('ms');
 
         if(db.fetch(`${guild}_ghostping`) == 1)
         {
@@ -32,9 +33,23 @@ module.exports = {
                     footer: {
                         text: `${message.author.tag}`,
                         icon_url: `${message.author.displayAvatarURL({dynamic : true})}`,
-                    },
+                    }, 
                 }
-                message.channel.send({embeds : [embed]});
+                const row = new Discord.MessageActionRow().addComponents(
+                    new Discord.MessageButton().setCustomId('timeout-ghost-ping').setStyle('DANGER').setLabel('Timeout').setEmoji('<:remove:967328034652848168>'),
+                )
+                
+                const msg = await message.channel.send({embeds : [embed] , components : [row]});
+                const collector = msg.createMessageComponentCollector({ componentType: 'BUTTON', time: 10000 });
+                collector.on('collect', async (b) => {
+                    if(!b.member.permissions.has(Discord.Permissions.FLAGS.MODERATE_MEMBERS))
+                    {
+                        return;
+                    }
+                    const member = message.guild.members.cache.get(message.author.id);
+                    member.timeout(3600*24*1000 , 'Ghost ping');
+                    //b.reply('ok');
+                });
             }
         }
     }

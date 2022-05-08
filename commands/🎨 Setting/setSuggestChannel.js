@@ -4,7 +4,7 @@ const Discord = require('discord.js');
 module.exports = {
     data : new SlashCommandBuilder()
         .setName('set-suggest-channel')
-        .setDescription('Set suggestion channel')
+        .setDescription('Set suggestions channel')
         .addChannelOption(options => options.setName('channel').setDescription('The channel you want')),
     async execute(interaction,client) {
         const guild = interaction.guild.id;
