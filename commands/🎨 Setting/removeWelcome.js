@@ -47,7 +47,6 @@ module.exports = {
             }
 
             const channel = myEnmap.get(`welcome_channel_${guild}`);
-            myEnmap.delete(`welcome_channel_${guild}`)
 
             const embed = {
                 author: {
@@ -62,6 +61,10 @@ module.exports = {
                     icon_url: `${interaction.user.displayAvatarURL({dynamic : true})}`,
                 },
             }
+            
+            myEnmap.delete(`welcome_channel_${guild}`);
+
+            
             interaction.reply({embeds : [embed]})
         }
         catch(e)
