@@ -5,7 +5,7 @@ module.exports = {
         const Discord = require('discord.js');
         const fetch = require('node-fetch');
         const guild = member.guild.id;
-        const myEnmap = require('../../utils/enmapUtils');
+        const myEnmap = require('../utils/enmapUtils');
 
         if(myEnmap.get(`welcome_channel_${guild}`)!==null)
         {

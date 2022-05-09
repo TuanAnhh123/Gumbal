@@ -28,7 +28,7 @@ module.exports = {
             return interaction.reply({embeds : [embed]});
         }
 
-        if(myEnmap.get(`chatbot_channel_${guild}`) === null)
+        if(!myEnmap.has(`chatbot_channel_${guild}`))
         {
             const embed = {
                 author: {
@@ -46,7 +46,7 @@ module.exports = {
             return interaction.reply({embeds : [embed]});
         }
 
-        const channel = myEnmap.get(`chatbot_channel_${guild}`);
+        const channel = myEnmap.get(`chat_channel_${guild}`);
         myEnmap.delete(`chatbot_channel_${guild}`);
 
         const embed = {

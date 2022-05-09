@@ -28,7 +28,7 @@ module.exports = {
                 return interaction.reply({embeds : [embed]});
             }
 
-            if(myEnmap.get(`suggestion_channel_${guild}`) === null)
+            if(!myEnmap.has(`suggestion_channel_${guild}`))
             {
                 const embed = {
                     author: {
