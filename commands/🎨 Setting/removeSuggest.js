@@ -46,6 +46,7 @@ module.exports = {
                 return interaction.reply({embeds : [embed]});
             }
 
+            const channel = myEnmap.get(`suggestion_channel_${guild}`);
             myEnmap.delete(`suggestion_channel_${guild}`);
 
             const embed = {

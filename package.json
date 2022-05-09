@@ -12,6 +12,7 @@
     "discord-api-types": "^0.31.1",
     "discord-giveaways": "^5.1.1",
     "discord-player": "^5.2.2",
+    "discord-yt-poster": "^3.1.2",
     "discord.js": "^13.6.0",
     "distube": "^3.3.4",
     "enmap": "^5.9.0",
