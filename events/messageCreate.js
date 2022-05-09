@@ -3,7 +3,7 @@ module.exports = {
 	async execute(message,client) {
         const fetch = require('node-fetch');
         const guild = message.guild.id;
-        const myEnmap = require('../../utils/enmapUtils');
+        const myEnmap = require('../utils/enmapUtils');
 
         const chatbot_channel = myEnmap.get(`chatbot_channel_${guild}`);
         const suggest_channel = myEnmap.get(`suggestion_channel_${guild}`);

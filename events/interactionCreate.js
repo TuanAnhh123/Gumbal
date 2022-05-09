@@ -3,7 +3,6 @@ const { MessageAttachment } = require('discord.js');
 module.exports = {
 	name: 'interactionCreate',
 	async execute(interaction,client) {
-        const db = interaction.client.db;
         const guild = interaction.guild.id;
 
 		if (!interaction.isCommand()) return;
