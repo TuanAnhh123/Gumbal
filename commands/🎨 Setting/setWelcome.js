@@ -1,14 +1,14 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const Discord = require('discord.js');
+const myEnmap = require('../../utils/enmapUtils');
 
 module.exports = {
     data : new SlashCommandBuilder()
         .setName('set-welcome-channel')
         .setDescription('Set welcome channel to welcome new member')
         .addChannelOption(options => options.setName('channel').setDescription('The channel you want')),
-    async execute(interaction,client) {
+    async execute(interaction) {
         const guild = interaction.guild.id;
-        const db = interaction.client.db;
 
         if(!interaction.member.permissions.has(Discord.Permissions.FLAGS.MANAGE_CHANNELS))
         {
@@ -64,25 +64,8 @@ module.exports = {
             }
             return interaction.reply({embeds : [embed]});
         }
-        if(db.fetch(`${guild}_welcome`) !== null)
-        {
-            const embed = {
-                author: {
-                    name: 'Error',
-                    icon_url: 'https://cdn.discordapp.com/emojis/965142498416685106.gif?size=96&quality=lossless',
-                },
-                description : '<:false:964905677518696548> This server is already has welcome channel.',
-                color : 'BLUE',
-                timestamp: new Date(),
-                footer: {
-                    text: `${interaction.user.tag}`,
-                    icon_url: `${interaction.user.displayAvatarURL({dynamic : true})}`,
-                },
-            }
-            return interaction.reply({embeds : [embed]});
-        }
 
-        await db.set(`${guild}_welcome` , channel.id);
+        myEnmap.set(`welcome_channel_${guild}` , channel.id);
 
         const embed = {
             author: {

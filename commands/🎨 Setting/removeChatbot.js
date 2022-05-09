@@ -1,6 +1,7 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed , MessageActionRow , MessageButton } = require('discord.js');
 const Discord = require('discord.js');
+const myEnmap = require('../../utils/enmapUtils');
 
 module.exports = {
     data : new SlashCommandBuilder()
@@ -8,7 +9,6 @@ module.exports = {
         .setDescription('Remove chat bot channel'),
     async execute(interaction,client) {
         const guild = interaction.guild.id;
-        const db = interaction.client.db;
 
         if(!interaction.member.permissions.has(Discord.Permissions.FLAGS.MANAGE_CHANNELS))
         {
@@ -28,7 +28,7 @@ module.exports = {
             return interaction.reply({embeds : [embed]});
         }
 
-        if(db.fetch(`${guild}_chatbot`) === null)
+        if(myEnmap.get(`chatbot_channel_${guild}`) === null)
         {
             const embed = {
                 author: {
@@ -46,9 +46,7 @@ module.exports = {
             return interaction.reply({embeds : [embed]});
         }
 
-        const channel = await db.get(`${guild}_chatbot`);
-
-        await db.delete(`${guild}_chatbot` , channel)
+        myEnmap.delete(`chatbot_channel_${guild}`);
 
         const embed = {
             author: {

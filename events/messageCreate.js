@@ -3,10 +3,10 @@ module.exports = {
 	async execute(message,client) {
         const fetch = require('node-fetch');
         const guild = message.guild.id;
-        const db = message.client.db;
+        const myEnmap = require('../../utils/enmapUtils');
 
-        const chatbot_channel = db.get(`${guild}_chatbot`);
-        const suggest_channel = db.get(`${guild}_suggest`);
+        const chatbot_channel = myEnmap.get(`chatbot_channel_${guild}`);
+        const suggest_channel = myEnmap.get(`suggestion_channel_${guild}`);
 
         if(message.channel.id === chatbot_channel && !message.author.bot)
         {

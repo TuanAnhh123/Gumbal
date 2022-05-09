@@ -5,7 +5,6 @@ const { YtDlpPlugin } = require("@distube/yt-dlp");
 const { MessageEmbed , MessageActionRow , MessageButton } = require('discord.js');
 const { DisTube } = require('distube');
 const { GiveawaysManager } = require('discord-giveaways');
-const db = require("quick.db");
 
 const client = new Client({ intents: [
 	Intents.FLAGS.GUILDS , 
@@ -22,6 +21,5 @@ client.commands = new Collection();
 
 require("./utils/handler.js")(client);
 
-client.db = db;
 
 client.login(token);

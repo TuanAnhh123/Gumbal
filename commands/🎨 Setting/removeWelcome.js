@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const Discord = require('discord.js');
+const myEnmap = require('../../utils/enmapUtils');
 
 module.exports = {
     data : new SlashCommandBuilder()
@@ -8,7 +9,6 @@ module.exports = {
     async execute(interaction,client) {
         try {
             const guild = interaction.guild.id;
-            const db = interaction.client.db;
 
             if(!interaction.member.permissions.has(Discord.Permissions.FLAGS.MANAGE_CHANNELS))
             {
@@ -28,7 +28,7 @@ module.exports = {
                 return interaction.reply({embeds : [embed]});
             }
 
-            if(db.fetch(`${guild}_welcome`) === null)
+            if(myEnmap.get(`welcome_channel_${guild}`) === null)
             {
                 const embed = {
                     author: {
@@ -46,9 +46,7 @@ module.exports = {
                 return interaction.reply({embeds : [embed]});
             }
 
-            const channel = await db.get(`${guild}_welcome`);
-
-            await db.delete(`${guild}_welcome` , channel)
+            myEnmap.delete(`welcome_channel_${guild}`)
 
             const embed = {
                 author: {
