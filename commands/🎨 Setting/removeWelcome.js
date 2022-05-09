@@ -34,7 +34,7 @@ module.exports = {
                     name: 'Error',
                     icon_url: 'https://cdn.discordapp.com/emojis/965142498416685106.gif?size=96&quality=lossless',
                 },
-                description : '<:false:964905677518696548> This server has no suggestion channel.',
+                description : '<:false:964905677518696548> This server has no welcome channel.',
                 color : 'BLUE',
                 timestamp: new Date(),
                 footer: {
