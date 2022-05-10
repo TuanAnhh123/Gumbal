@@ -7,7 +7,7 @@ module.exports = {
         const db = message.client.db;
         const ms = require('ms');
 
-        if(db.fetch(`${guild}_ghostping`) == 1)
+        /*if(db.fetch(`${guild}_ghostping`) == 1)
         {
             if(message.author.bot) return;
             const member = message.mentions.members.first();
@@ -51,6 +51,6 @@ module.exports = {
                     //b.reply('ok');
                 });
             }
-        }
+        }*/
     }
 };

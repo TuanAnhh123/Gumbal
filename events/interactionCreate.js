@@ -1,9 +1,18 @@
 const { MessageAttachment } = require('discord.js');
+const { MessageActionRow , MessageEmbed } = require('discord.js');
 
 module.exports = {
 	name: 'interactionCreate',
 	async execute(interaction,client) {
         const guild = interaction.guild.id;
+
+        /*if(interaction.isButton())
+        {
+            if(interaction.customId == 'welcome-channel')
+            {
+                interaction.reply('ừ');
+            }
+        }*/
 
 		if (!interaction.isCommand()) return;
 

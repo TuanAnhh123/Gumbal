@@ -5,10 +5,10 @@ module.exports = {
         const guild = message.guild.id;
         const myEnmap = require('../utils/enmapUtils');
 
-        const chatbot_channel = myEnmap.get(`chatbot_channel_${guild}`);
+        //const chatbot_channel = myEnmap.get(`chatbot_channel_${guild}`);
         const suggest_channel = myEnmap.get(`suggestion_channel_${guild}`);
 
-        if(message.channel.id === chatbot_channel && !message.author.bot)
+        /*if(message.channel.id === chatbot_channel && !message.author.bot)
         {
             fetch(`https://some-random-api.ml/chatbot?message=${message.content}&key=s1HpWsm7B8J56EZoZjwZsb7nhbZhYqZmRezxQGznVS7xC60Vo9dvGoDrZd8NKzCZ`)
                 .then(response => response.json())
@@ -18,7 +18,7 @@ module.exports = {
                 .catch(() => {
                     message.reply("Couldn't fetch response!");
                 })
-        }
+        }*/
         if(message.channel.id === suggest_channel && !message.author.bot)
         {
             message.delete();
