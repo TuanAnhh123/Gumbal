@@ -13,18 +13,9 @@ module.exports = {
 
         if(!song) 
         {
-            const embed = {
-                author: {
-                    name: 'Error',
-                    icon_url: 'https://cdn.discordapp.com/emojis/965142498416685106.gif?size=96&quality=lossless',
-                },
+            const embed = {    
                 description : '<:false:964905677518696548> You need to enter the song name.',
-                color : 'BLUE',
-                timestamp: new Date(),
-                footer: {
-                    text: `${interaction.user.tag}`,
-                    icon_url: `${interaction.user.displayAvatarURL({dynamic : true})}`,
-                },
+                color : 'RED',
             }
             return interaction.reply({embeds : [embed]});
         }
@@ -32,17 +23,8 @@ module.exports = {
         if(!interaction.member.voice.channel)
         {
             const embed = {
-                author: {
-                    name: 'Error',
-                    icon_url: 'https://cdn.discordapp.com/emojis/965142498416685106.gif?size=96&quality=lossless',
-                },
                 description : '<:false:964905677518696548> You need to join voice channel to use this command.',
-                color : 'BLUE',
-                timestamp: new Date(),
-                footer: {
-                    text: `${interaction.user.tag}`,
-                    icon_url: `${interaction.user.displayAvatarURL({dynamic : true})}`,
-                },
+                color : 'RED',
             }
             return interaction.reply({embeds : [embed]});
         }
@@ -51,17 +33,8 @@ module.exports = {
         if (cChannel && mChannel.id !== cChannel.id) 
         {
             const embed = {
-                author: {
-                    name: 'Error',
-                    icon_url: 'https://cdn.discordapp.com/emojis/965142498416685106.gif?size=96&quality=lossless',
-                },
                 description : '<:false:964905677518696548> I\'m playing music in other voice channel.',
-                color : 'BLUE',
-                timestamp: new Date(),
-                footer: {
-                    text: `${interaction.user.tag}`,
-                    icon_url: `${interaction.user.displayAvatarURL({dynamic : true})}`,
-                },
+                color : 'RED',
             }
             return interaction.reply({embeds : [embed]});
         }
@@ -72,17 +45,8 @@ module.exports = {
         })
 
         const embed = {
-            author: {
-                name: 'Searching music',
-                icon_url: 'https://cdn.discordapp.com/emojis/962926434597363712.gif?size=128&quality=lossless',
-            },
             description : '<a:load:964783848145707048> Searching...',
             color : 'BLUE',
-            timestamp: new Date(),
-            footer: {
-                text: `${interaction.user.tag}`,
-                icon_url: `${interaction.user.displayAvatarURL({dynamic : true})}`,
-            },
         }
 
         interaction.reply({embeds : [embed]});

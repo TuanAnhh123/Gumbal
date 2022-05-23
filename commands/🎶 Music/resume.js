@@ -11,17 +11,8 @@ module.exports = {
         if(!interaction.member.voice.channel)
         {
             const embed = {
-                author: {
-                    name: 'Error',
-                    icon_url: 'https://cdn.discordapp.com/emojis/965142498416685106.gif?size=96&quality=lossless',
-                },
                 description : '<:false:964905677518696548> You need to join voice channel to use this command.',
-                color : 'BLUE',
-                timestamp: new Date(),
-                footer: {
-                    text: `${interaction.user.tag}`,
-                    icon_url: `${interaction.user.displayAvatarURL({dynamic : true})}`,
-                },
+                color : 'RED',
             }
             return interaction.reply({embeds : [embed]});
         }
@@ -31,34 +22,16 @@ module.exports = {
         if(!queue)
         {
             const embed = {
-                author: {
-                    name: 'Error',
-                    icon_url: 'https://cdn.discordapp.com/emojis/965142498416685106.gif?size=96&quality=lossless',
-                },
                 description : '<:false:964905677518696548> There is no song right now.',
-                color : 'BLUE',
-                timestamp: new Date(),
-                footer: {
-                    text: `${interaction.user.tag}`,
-                    icon_url: `${interaction.user.displayAvatarURL({dynamic : true})}`,
-                },
+                color : 'RED',
             }
             return interaction.reply({embeds : [embed]});
         }
         if(!queue.paused)
         {
             const embed = {
-                author: {
-                    name: 'Error',
-                    icon_url: 'https://cdn.discordapp.com/emojis/965142498416685106.gif?size=96&quality=losslesss',
-                },
                 description : '<:false:964905677518696548> The player has not been paused.',
-                color : 'BLUE',
-                timestamp: new Date(),
-                footer: {
-                    text: `${interaction.user.tag}`,
-                    icon_url: `${interaction.user.displayAvatarURL({dynamic : true})}`,
-                },
+                color : 'RED',
             }
             return interaction.reply({embeds : [embed]});
         }
@@ -66,17 +39,8 @@ module.exports = {
         distube.resume(interaction);
 
         const embed = {
-            author: {
-                name: ' Resume',
-                icon_url: 'https://cdn.discordapp.com/emojis/962926434597363712.gif?size=128&quality=lossless',
-            },
-            description : '🔼 Resumed the player.',
+            description : '<:resume:967350635865440276> Resumed the player.',
             color : 'BLUE',
-            timestamp: new Date(),
-            footer: {
-                text: `${interaction.user.tag}`,
-                icon_url: `${interaction.user.displayAvatarURL({dynamic : true})}`,
-            },
         }
 
         interaction.reply({embeds : [embed]});
